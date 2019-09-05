@@ -63,7 +63,6 @@ spotless {
         ktlint()
         licenseHeaderFile "LicenseHeader.txt"
     }
-
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
