@@ -60,7 +60,7 @@ dependencies {
 
 spotless {
     kotlin {
-        ktlint()
+        ktlint().userData(['insert_final_newline': 'true'])
         licenseHeaderFile "LicenseHeader.txt"
     }
 }
