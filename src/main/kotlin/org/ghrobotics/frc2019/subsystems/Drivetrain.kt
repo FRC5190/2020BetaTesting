@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
+import org.ghrobotics.frc2019.Constants
 import org.ghrobotics.frc2019.commands.TeleopDriveCommand
 import org.ghrobotics.lib.mathematics.twodim.control.RamseteTracker
 import org.ghrobotics.lib.mathematics.units.Meter
@@ -31,10 +32,6 @@ object Drivetrain : FalconWestCoastDrivetrain() {
 
     // Constants are at the top of each subsystem.
     // These must be private.
-    private const val kLeftMasterId = 1
-    private const val kLeftSlave1Id = 2
-    private const val kRightMasterId = 3
-    private const val kRightSlave1Id = 4
 
     private const val kPigeonId = 17
 
@@ -47,10 +44,10 @@ object Drivetrain : FalconWestCoastDrivetrain() {
     // Overriden variables
 
     // Motors
-    override val leftMotor: FalconMAX<Meter> = FalconMAX(kLeftMasterId, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
-    override val rightMotor: FalconMotor<Meter> = FalconMAX(kRightMasterId, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
-    private val leftSlave1: FalconMotor<Meter> = FalconMAX(kLeftSlave1Id, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
-    private val rightSlave1: FalconMotor<Meter> = FalconMAX(kRightSlave1Id, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
+    override val leftMotor = FalconMAX(Constants.kLeftMasterId, CANSparkMaxLowLevel.MotorType.kBrushless, Constants.kDriveNativeUnitModel)
+    override val rightMotor = FalconMAX(Constants.kRightMasterId, CANSparkMaxLowLevel.MotorType.kBrushless, Constants.kDriveNativeUnitModel)
+    private val leftSlave1 = FalconMAX(Constants.kLeftSlave1Id, CANSparkMaxLowLevel.MotorType.kBrushless, Constants.kDriveNativeUnitModel)
+    private val rightSlave1 = FalconMAX(Constants.kRightSlave1Id, CANSparkMaxLowLevel.MotorType.kBrushless, Constants.kDriveNativeUnitModel)
 
     // Motor characterization
     override val leftCharacterization: MotorCharacterization<Meter> = TODO()
