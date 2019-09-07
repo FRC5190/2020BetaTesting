@@ -9,13 +9,19 @@
 package org.ghrobotics.frc2019.subsystems
 
 import com.ctre.phoenix.sensors.PigeonIMU
+import com.revrobotics.CANSparkMax
+import com.revrobotics.CANSparkMaxLowLevel
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
 import org.ghrobotics.frc2019.commands.TeleopDriveCommand
 import org.ghrobotics.lib.mathematics.twodim.control.RamseteTracker
 import org.ghrobotics.lib.mathematics.units.Meter
+import org.ghrobotics.lib.mathematics.units.inch
+import org.ghrobotics.lib.mathematics.units.nativeunit.NativeUnitLengthModel
+import org.ghrobotics.lib.mathematics.units.nativeunit.nativeUnits
 import org.ghrobotics.lib.motors.FalconMotor
+import org.ghrobotics.lib.motors.rev.FalconMAX
 import org.ghrobotics.lib.physics.MotorCharacterization
 import org.ghrobotics.lib.subsystems.drive.FalconWestCoastDrivetrain
 import org.ghrobotics.lib.utils.Source
@@ -41,10 +47,10 @@ object Drivetrain : FalconWestCoastDrivetrain() {
     // Overriden variables
 
     // Motors
-    override val leftMotor: FalconMotor<Meter> = TODO()
-    override val rightMotor: FalconMotor<Meter> = TODO()
-    private val leftSlave1: FalconMotor<Meter> = TODO()
-    private val rightSlave1: FalconMotor<Meter> = TODO()
+    override val leftMotor: FalconMAX<Meter> = FalconMAX(kLeftMasterId, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
+    override val rightMotor: FalconMotor<Meter> = FalconMAX(kRightMasterId, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
+    private val leftSlave1: FalconMotor<Meter> = FalconMAX(kLeftSlave1Id, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
+    private val rightSlave1: FalconMotor<Meter> = FalconMAX(kRightSlave1Id, CANSparkMaxLowLevel.MotorType.kBrushless, NativeUnitLengthModel(306.18.nativeUnits, 3.inch))
 
     // Motor characterization
     override val leftCharacterization: MotorCharacterization<Meter> = TODO()
