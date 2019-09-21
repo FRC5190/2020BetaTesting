@@ -8,8 +8,11 @@
 
 package org.ghrobotics.frc2019.subsystems
 
+import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkMaxLowLevel
 import edu.wpi.first.wpilibj.controller.RamseteController
+import edu.wpi.first.wpilibj.SPI
+import edu.wpi.first.wpilibj.geometry.Pose2d
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
@@ -18,6 +21,7 @@ import org.ghrobotics.frc2019.commands.TeleopDriveCommand
 import org.ghrobotics.lib.mathematics.units.Meter
 import org.ghrobotics.lib.mathematics.units.SIUnit
 import org.ghrobotics.lib.mathematics.units.derived.volts
+import org.ghrobotics.lib.mathematics.units.meters
 import org.ghrobotics.lib.motors.rev.FalconMAX
 import org.ghrobotics.lib.physics.MotorCharacterization
 import org.ghrobotics.lib.subsystems.drive.FalconWestCoastDrivetrain
@@ -26,7 +30,7 @@ import org.ghrobotics.lib.utils.Source
 object Drivetrain : FalconWestCoastDrivetrain() {
 
     // Private member variables
-    // private val pigeon = PigeonIMU(kPigeonId)
+    private val navX = AHRS(SPI.Port.kMXP)
 
     // Overriden variables
 
@@ -57,11 +61,11 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         )
 
     // Motor characterization
-    override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.0))
+    override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.1))
     override val rightCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.0))
 
     // Gyro
-    override val gyro: Source<Rotation2d> = { Rotation2d() }
+    override val gyro: Source<Rotation2d> = { Rotation2d.fromDegrees(-navX.yaw.toDouble()) }
 
     // Kinematics
     override val kinematics = DifferentialDriveKinematics(Constants.Drivetrain.kTrackWidth.value)
@@ -81,12 +85,23 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         rightSlave1.follow(rightMotor)
 
         listOf(leftMotor, rightMotor).forEach { motor ->
+            motor.canSparkMax.restoreFactoryDefaults()
+            motor.encoder.resetPosition(0.meters)
             motor.brakeMode = true
             motor.voltageCompSaturation = 12.volts
             motor.canSparkMax.setSmartCurrentLimit(38) // Amperes
         }
 
         defaultCommand = TeleopDriveCommand()
+        recoverFromEmergency()
+    }
+
+    fun resetPosition(pose: Pose2d) {
+        navX.zeroYaw()
+        navX.reset()
+        navX.reset()
+        navX.reset()
+        odometry.resetPosition(pose)
     }
 
     // Emergency management

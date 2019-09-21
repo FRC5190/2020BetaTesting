@@ -26,8 +26,8 @@ object Constants {
 
         // Native Unit Model
         val kWheelRadius = 3.inches
-        val kSensorUnitsPerRotation = 306.18.nativeUnits
-        val kNativeUnitModel = NativeUnitLengthModel(kSensorUnitsPerRotation, kWheelRadius)
+        val kGearRatio = 7.29.nativeUnits
+        val kNativeUnitModel = NativeUnitLengthModel(kGearRatio, kWheelRadius)
 
         // Ramsete Tracker
         const val kBeta = 2.0
@@ -37,6 +37,6 @@ object Constants {
         val kTrackWidth = 28.75.inches
 
         // Closed Loop Gains
-        const val kP = 0.0001
+        const val kP = 0.0007
     }
 }
