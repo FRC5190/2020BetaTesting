@@ -52,10 +52,10 @@ dependencies {
     // We need to add the Kotlin stdlib in order to use most Kotlin language features.
     compile "org.jetbrains.kotlin:kotlin-stdlib"
 
-    compile "org.ghrobotics.FalconLibrary:core:5dd08a29d6"
-    compile "org.ghrobotics.FalconLibrary:wpi:5dd08a29d6"
-    compile "org.ghrobotics.FalconLibrary:vendorCTRE:5dd08a29d6"
-    compile "org.ghrobotics.FalconLibrary:vendorREV:5dd08a29d6"
+    compile "org.ghrobotics.FalconLibrary:core:9768375"
+    compile "org.ghrobotics.FalconLibrary:wpi:9768375"
+    compile "org.ghrobotics.FalconLibrary:vendorCTRE:9768375"
+    compile "org.ghrobotics.FalconLibrary:vendorREV:9768375"
 }
 
 spotless {
@@ -71,6 +71,12 @@ spotless {
 jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 wrapper {
