@@ -9,10 +9,15 @@
 package org.ghrobotics.frc2019
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard
+import org.ghrobotics.frc2019.auto.Autonomous
 import org.ghrobotics.frc2019.subsystems.Drivetrain
 import org.ghrobotics.lib.wrappers.FalconTimedRobot
+import org.ghrobotics.lib.wrappers.networktables.enumSendableChooser
 
 object Robot : FalconTimedRobot() {
+
+    // Chooser for the auto mode.
+    private val autoModeSelector = enumSendableChooser<Autonomous.Mode>()
 
     // Constructor of the Robot class.
     init {
@@ -20,10 +25,17 @@ object Robot : FalconTimedRobot() {
     }
 
     // Runs once when robot boots up
-    override fun robotInit() {}
+    override fun robotInit() {
+        // Add auto mode selector to Shuffleboard
+        Shuffleboard.getTab("5190").add(autoModeSelector)
+    }
 
     // Runs once when autonomous period starts
-    override fun autonomousInit() {}
+    override fun autonomousInit() {
+        // Start the autonomous routine with the selected auto mode from the
+        // sendable chooser.
+        Autonomous.start(autoModeSelector.selected)
+    }
 
     // Runs once when teleop period starts
     override fun teleopInit() {}
