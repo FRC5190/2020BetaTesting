@@ -98,9 +98,6 @@ object Drivetrain : FalconWestCoastDrivetrain() {
 
     fun resetPosition(pose: Pose2d) {
         navX.zeroYaw()
-        navX.reset()
-        navX.reset()
-        navX.reset()
         odometry.resetPosition(pose)
     }
 

@@ -10,6 +10,7 @@ package org.ghrobotics.frc2019.auto
 
 import edu.wpi.first.wpilibj2.command.CommandGroupBase
 import org.ghrobotics.frc2019.auto.routines.CharacterizationRoutine
+import org.ghrobotics.frc2019.auto.routines.TrackTrajectoryRoutine
 import org.ghrobotics.lib.commands.S3ND
 
 /**
@@ -28,6 +29,7 @@ object Autonomous {
         // Get the command representing the routine.
         val just: CommandGroupBase = when (mode) {
             Mode.CHARACTERIZE -> CharacterizationRoutine
+            Mode.TRACK_TRAJECTORY -> TrackTrajectoryRoutine()
         }.build()
 
         // Start the routine.
@@ -38,6 +40,6 @@ object Autonomous {
      * Represents the auto mode.
      */
     enum class Mode {
-        CHARACTERIZE
+        CHARACTERIZE, TRACK_TRAJECTORY
     }
 }
