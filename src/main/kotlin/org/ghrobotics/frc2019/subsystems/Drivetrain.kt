@@ -9,12 +9,12 @@
 package org.ghrobotics.frc2019.subsystems
 
 import com.revrobotics.CANSparkMaxLowLevel
+import edu.wpi.first.wpilibj.controller.RamseteController
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
 import org.ghrobotics.frc2019.Constants
 import org.ghrobotics.frc2019.commands.TeleopDriveCommand
-import org.ghrobotics.lib.mathematics.twodim.control.RamseteTracker
 import org.ghrobotics.lib.mathematics.units.Meter
 import org.ghrobotics.lib.mathematics.units.SIUnit
 import org.ghrobotics.lib.mathematics.units.derived.volts
@@ -70,7 +70,7 @@ object Drivetrain : FalconWestCoastDrivetrain() {
     override val odometry = DifferentialDriveOdometry(kinematics)
 
     // Trajectory tracker
-    override val trajectoryTracker = RamseteTracker(Constants.Drivetrain.kBeta, Constants.Drivetrain.kZeta)
+    override val controller = RamseteController(Constants.Drivetrain.kBeta, Constants.Drivetrain.kZeta)
 
     // Constructor
     init {
