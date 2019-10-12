@@ -56,6 +56,8 @@ dependencies {
     compile "org.ghrobotics.FalconLibrary:wpi:01aae7b"
     compile "org.ghrobotics.FalconLibrary:vendorCTRE:01aae7b"
     compile "org.ghrobotics.FalconLibrary:vendorREV:01aae7b"
+    compile "org.ghrobotics.FalconLibrary:vendorNAVX:01aae7b"
+
 }
 
 spotless {
