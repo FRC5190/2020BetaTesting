@@ -10,16 +10,16 @@ package org.ghrobotics.frc2019.subsystems
 
 import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkMaxLowLevel
-import edu.wpi.first.wpilibj.controller.RamseteController
 import edu.wpi.first.wpilibj.SPI
+import edu.wpi.first.wpilibj.controller.RamseteController
 import edu.wpi.first.wpilibj.geometry.Pose2d
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
 import org.ghrobotics.frc2019.Constants
+import org.ghrobotics.frc2019.Constants.Drivetrain.kRightKv
 import org.ghrobotics.frc2019.commands.TeleopDriveCommand
 import org.ghrobotics.lib.mathematics.units.Meter
-import org.ghrobotics.lib.mathematics.units.SIUnit
 import org.ghrobotics.lib.mathematics.units.derived.volts
 import org.ghrobotics.lib.mathematics.units.meters
 import org.ghrobotics.lib.motors.rev.FalconMAX
@@ -31,8 +31,6 @@ object Drivetrain : FalconWestCoastDrivetrain() {
 
     // Private member variables
     private val navX = AHRS(SPI.Port.kMXP)
-
-    // Overriden variables
 
     // Motors
     override val leftMotor =
@@ -61,8 +59,16 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         )
 
     // Motor characterization
-    override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(1.75), SIUnit(0.0398), SIUnit(0.204))
-    override val rightCharacterization = MotorCharacterization<Meter>(SIUnit(1.76), SIUnit(0.0601), SIUnit(0.191))
+    override val leftCharacterization = MotorCharacterization(
+        Constants.Drivetrain.kLeftKv,
+        Constants.Drivetrain.kLeftKa,
+        Constants.Drivetrain.kLeftKs
+    )
+    override val rightCharacterization = MotorCharacterization<Meter>(
+        kRightKv,
+        Constants.Drivetrain.kRightKa,
+        Constants.Drivetrain.kRightKs
+    )
 
     // Gyro
     override val gyro: Source<Rotation2d> = { Rotation2d.fromDegrees(-navX.yaw.toDouble()) }
