@@ -8,13 +8,20 @@
 
 package org.ghrobotics.frc2019.auto.routines
 
+import edu.wpi.first.wpilibj2.command.InstantCommand
 import org.ghrobotics.frc2019.auto.Paths
 import org.ghrobotics.frc2019.subsystems.Drivetrain
+import org.ghrobotics.lib.commands.sequential
 
 /**
  * Routine that tests trajectory tracking.
  */
 class TrackTrajectoryRoutine : AutoRoutine {
     override val name = "Track Trajectory"
-    override val routine = Drivetrain.followTrajectory(Paths.trajectory)
+    override val routine = sequential {
+        +InstantCommand(Runnable {
+            Drivetrain.resetPosition(Paths.trajectory.sample(0.0).poseMeters)
+        }, Drivetrain)
+        +Drivetrain.followTrajectory(Paths.trajectory)
+    }
 }

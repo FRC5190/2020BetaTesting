@@ -61,8 +61,8 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         )
 
     // Motor characterization
-    override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.1))
-    override val rightCharacterization = MotorCharacterization<Meter>(SIUnit(0.0), SIUnit(0.0), SIUnit(0.0))
+    override val leftCharacterization = MotorCharacterization<Meter>(SIUnit(1.75), SIUnit(0.0398), SIUnit(0.204))
+    override val rightCharacterization = MotorCharacterization<Meter>(SIUnit(1.76), SIUnit(0.0601), SIUnit(0.191))
 
     // Gyro
     override val gyro: Source<Rotation2d> = { Rotation2d.fromDegrees(-navX.yaw.toDouble()) }

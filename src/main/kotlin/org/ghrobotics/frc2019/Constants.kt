@@ -37,6 +37,6 @@ object Constants {
         val kTrackWidth = 28.75.inches
 
         // Closed Loop Gains
-        const val kP = 0.0007
+        const val kP = 0.0000
     }
 }

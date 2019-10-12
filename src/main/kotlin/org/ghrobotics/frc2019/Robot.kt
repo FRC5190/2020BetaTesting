@@ -10,6 +10,7 @@ package org.ghrobotics.frc2019
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard
 import org.ghrobotics.frc2019.auto.Autonomous
+import org.ghrobotics.frc2019.auto.Paths
 import org.ghrobotics.frc2019.subsystems.Drivetrain
 import org.ghrobotics.lib.wrappers.FalconTimedRobot
 import org.ghrobotics.lib.wrappers.networktables.enumSendableChooser
@@ -21,13 +22,16 @@ object Robot : FalconTimedRobot() {
 
     // Constructor of the Robot class.
     init {
+
+        Paths
+
         +Drivetrain
     }
 
     // Runs once when robot boots up
     override fun robotInit() {
         // Add auto mode selector to Shuffleboard
-        Shuffleboard.getTab("5190").add(autoModeSelector)
+        Shuffleboard.getTab("5190").add("Auto Selector", autoModeSelector)
     }
 
     // Runs once when autonomous period starts
