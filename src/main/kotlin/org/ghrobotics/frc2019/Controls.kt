@@ -8,19 +8,35 @@
 
 package org.ghrobotics.frc2019
 
+import edu.wpi.first.wpilibj.GenericHID
+import edu.wpi.first.wpilibj.Solenoid
 import org.ghrobotics.frc2019.commands.ToggleFingersCommand
 import org.ghrobotics.frc2019.commands.VisionDriveCommand
-import org.ghrobotics.lib.wrappers.hid.button
-import org.ghrobotics.lib.wrappers.hid.kA
-import org.ghrobotics.lib.wrappers.hid.kY
-import org.ghrobotics.lib.wrappers.hid.xboxController
+import org.ghrobotics.lib.wrappers.hid.*
 
 object Controls {
+
+    val solenoid = Solenoid(41, 2)
+    var set = false
+
     val driverController = xboxController(0) {
         // Toggle the state of the fingers when the A button is pressed.
-        button(kA).changeOn(ToggleFingersCommand())
+        triggerAxisButton(GenericHID.Hand.kRight).changeOn {
+            println("test")
+            ToggleFingersCommand().schedule()
+        }
+
+        button(kB).changeOn {
+            solenoid.set(!set)
+            set = !set
+        }
+
 
         // Vision align when Y is pressed.
-        button(kY).change(VisionDriveCommand())
+        triggerAxisButton(GenericHID.Hand.kLeft).change(VisionDriveCommand())
+    }
+
+    fun update() {
+        driverController.update()
     }
 }

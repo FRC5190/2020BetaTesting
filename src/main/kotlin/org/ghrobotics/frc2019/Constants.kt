@@ -23,7 +23,7 @@ object Constants {
 
     const val kPCMId = 41
 
-    val kCameraRelativeToCenter = Pose2d(15.inches, 0.inches, Rotation2d())
+    val kCameraRelativeToCenter = Pose2d(13.inches, (-10).inches, Rotation2d())
 
     // Drivetrain
     object Drivetrain {
@@ -58,7 +58,7 @@ object Constants {
     }
 
     object Intake {
-        const val kFingersId = 1
+        const val kFingersId = 0
     }
 
     object Vision {

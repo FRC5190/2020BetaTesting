@@ -34,6 +34,7 @@ class CloseFingersCommand : FalconCommand(Intake) {
  */
 class ToggleFingersCommand : FalconCommand(Intake) {
     override fun initialize() {
+        println("ran")
         if (Intake.areFingersOpen) Intake.closeFingers() else Intake.openFingers()
     }
 }

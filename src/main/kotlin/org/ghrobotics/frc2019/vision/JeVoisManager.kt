@@ -33,6 +33,8 @@ object JeVoisManager {
                 }
             }
 
+            println(SerialPort.getCommPorts().map { it.descriptivePortName })
+
             val jevoisPorts = SerialPort.getCommPorts().filter { it.descriptivePortName.contains("JeVois", true) }
             for (port in jevoisPorts) {
                 if (connectedCameras.any { it.systemPortName.equals(port.systemPortName, true) }) {

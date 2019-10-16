@@ -15,7 +15,7 @@ import org.ghrobotics.lib.commands.FalconSubsystem
 object Intake : FalconSubsystem() {
 
     // Solenoid for fingers
-    private val fingers = Solenoid(Constants.Intake.kFingersId, Constants.kPCMId)
+    private val fingers = Solenoid(Constants.kPCMId, Constants.Intake.kFingersId)
 
     // State of the fingers
     var areFingersOpen: Boolean = false

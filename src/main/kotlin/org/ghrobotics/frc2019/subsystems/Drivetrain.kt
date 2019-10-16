@@ -91,6 +91,7 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         rightSlave1.follow(rightMotor)
 
         listOf(leftMotor, rightMotor).forEach { motor ->
+            motor.canSparkMax.openLoopRampRate = 0.5
             motor.canSparkMax.restoreFactoryDefaults()
             motor.encoder.resetPosition(0.meters)
             motor.brakeMode = true

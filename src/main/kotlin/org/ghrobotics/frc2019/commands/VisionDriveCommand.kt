@@ -52,7 +52,7 @@ class VisionDriveCommand : TeleopDriveCommand() {
     }
 
     companion object {
-        const val kCorrectionKp = 0.8
-        const val kCorrectionKd = 8.0
+        const val kCorrectionKp = 0.5
+        const val kCorrectionKd = 0.0
     }
 }
