@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard
 import org.ghrobotics.frc2019.auto.Autonomous
 import org.ghrobotics.frc2019.auto.Paths
 import org.ghrobotics.frc2019.subsystems.Drivetrain
+import org.ghrobotics.frc2019.subsystems.Intake
+import org.ghrobotics.frc2019.vision.JeVoisManager
+import org.ghrobotics.frc2019.vision.TargetTracker
 import org.ghrobotics.lib.wrappers.FalconTimedRobot
 import org.ghrobotics.lib.wrappers.networktables.enumSendableChooser
 
@@ -22,10 +25,13 @@ object Robot : FalconTimedRobot() {
 
     // Constructor of the Robot class.
     init {
-
-        Paths
-
         +Drivetrain
+        +Intake
+        +TargetTracker
+
+        Controls
+        Paths
+        JeVoisManager
     }
 
     // Runs once when robot boots up
@@ -50,13 +56,15 @@ object Robot : FalconTimedRobot() {
     // Runs every 20 ms when robot is on
     override fun robotPeriodic() {
         Shuffleboard.update()
+        Controls.update()
     }
 
     // Runs every 20 ms when autonomous is enabled
     override fun autonomousPeriodic() {}
 
     // Runs every 20 ms when teleop is enabled
-    override fun teleopPeriodic() {}
+    override fun teleopPeriodic() {
+    }
 
     // Runs every 20 ms when robot is disabled
     override fun disabledPeriodic() {}
