@@ -18,7 +18,6 @@ import org.ghrobotics.lib.mathematics.twodim.trajectory.FalconTrajectoryGenerato
 import org.ghrobotics.lib.mathematics.units.derived.acceleration
 import org.ghrobotics.lib.mathematics.units.derived.velocity
 import org.ghrobotics.lib.mathematics.units.feet
-import org.ghrobotics.lib.mathematics.units.meters
 
 /**
  * Container for autonomous paths.
