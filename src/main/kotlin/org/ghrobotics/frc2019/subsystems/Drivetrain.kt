@@ -78,12 +78,6 @@ object Drivetrain : FalconWestCoastDrivetrain() {
 
     // Constructor
     init {
-        leftMotor.outputInverted = false
-        rightMotor.outputInverted = true
-
-        leftSlave1.follow(leftMotor)
-        rightSlave1.follow(rightMotor)
-
         listOf(leftMotor, rightMotor).forEach { motor ->
             motor.canSparkMax.restoreFactoryDefaults()
             motor.encoder.resetPosition(0.meters)
@@ -91,6 +85,12 @@ object Drivetrain : FalconWestCoastDrivetrain() {
             motor.voltageCompSaturation = 12.volts
             motor.canSparkMax.setSmartCurrentLimit(38) // Amperes
         }
+
+        leftMotor.outputInverted = false
+        rightMotor.outputInverted = true
+
+        leftSlave1.follow(leftMotor)
+        rightSlave1.follow(rightMotor)
 
         defaultCommand = TeleopDriveCommand()
         recoverFromEmergency()

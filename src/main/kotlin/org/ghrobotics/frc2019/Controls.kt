@@ -12,4 +12,11 @@ import org.ghrobotics.lib.wrappers.hid.xboxController
 
 object Controls {
     val driverController = xboxController(0) { }
+
+    /**
+     * Update the controller state.
+     */
+    fun update() {
+        driverController.update()
+    }
 }

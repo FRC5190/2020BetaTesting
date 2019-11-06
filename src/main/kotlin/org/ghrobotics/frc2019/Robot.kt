@@ -56,7 +56,9 @@ object Robot : FalconTimedRobot() {
     override fun autonomousPeriodic() {}
 
     // Runs every 20 ms when teleop is enabled
-    override fun teleopPeriodic() {}
+    override fun teleopPeriodic() {
+        Controls.update()
+    }
 
     // Runs every 20 ms when robot is disabled
     override fun disabledPeriodic() {}
