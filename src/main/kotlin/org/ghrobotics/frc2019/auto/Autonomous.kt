@@ -9,6 +9,7 @@
 package org.ghrobotics.frc2019.auto
 
 import edu.wpi.first.wpilibj2.command.CommandGroupBase
+import org.ghrobotics.frc2019.auto.routines.BalanceTeeterTotterRoutine
 import org.ghrobotics.frc2019.auto.routines.CharacterizationRoutine
 import org.ghrobotics.frc2019.auto.routines.TrackTrajectoryRoutine
 import org.ghrobotics.lib.commands.S3ND
@@ -30,6 +31,7 @@ object Autonomous {
         val just: CommandGroupBase = when (mode) {
             Mode.CHARACTERIZE -> CharacterizationRoutine
             Mode.TRACK_TRAJECTORY -> TrackTrajectoryRoutine()
+            Mode.TEETER_TOTTER -> BalanceTeeterTotterRoutine()
         }.build()
 
         // Start the routine.
@@ -40,6 +42,6 @@ object Autonomous {
      * Represents the auto mode.
      */
     enum class Mode {
-        CHARACTERIZE, TRACK_TRAJECTORY
+        CHARACTERIZE, TRACK_TRAJECTORY, TEETER_TOTTER
     }
 }

@@ -19,19 +19,19 @@ object Robot : FalconTimedRobot() {
 
     // Chooser for the auto mode.
     private val autoModeSelector = enumSendableChooser<Autonomous.Mode>()
+    private val pitch = Shuffleboard.getTab("5190").add("Pitch", 0.0).entry
 
     // Constructor of the Robot class.
     init {
-
         Paths
-
         +Drivetrain
     }
 
     // Runs once when robot boots up
     override fun robotInit() {
         // Add auto mode selector to Shuffleboard
-        Shuffleboard.getTab("5190").add("Auto Selector", autoModeSelector)
+        val tab = Shuffleboard.getTab("5190")
+        tab.add("Auto Selector", autoModeSelector)
     }
 
     // Runs once when autonomous period starts
@@ -50,6 +50,7 @@ object Robot : FalconTimedRobot() {
     // Runs every 20 ms when robot is on
     override fun robotPeriodic() {
         Shuffleboard.update()
+        pitch.setDouble(Drivetrain.getPitch().degrees)
     }
 
     // Runs every 20 ms when autonomous is enabled

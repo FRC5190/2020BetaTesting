@@ -101,6 +101,10 @@ object Drivetrain : FalconWestCoastDrivetrain() {
         odometry.resetPosition(pose)
     }
 
+    fun getPitch(): Rotation2d {
+        return Rotation2d.fromDegrees(navX.roll.toDouble())
+    }
+
     // Emergency management
     override fun activateEmergency() {
         listOf(leftMotor, rightMotor).forEach { motor ->
