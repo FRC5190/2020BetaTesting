@@ -11,8 +11,10 @@ package org.ghrobotics.frc2019.commands
 import org.ghrobotics.frc2019.subsystems.Drivetrain
 import org.ghrobotics.lib.commands.FalconCommand
 
-class OpenLoopDriveCommand(private val left: Double,
-                           private val right: Double) : FalconCommand(Drivetrain) {
+class OpenLoopDriveCommand(
+    private val left: Double,
+    private val right: Double
+) : FalconCommand(Drivetrain) {
     override fun initialize() {
         Drivetrain.setPercent(left, right)
     }

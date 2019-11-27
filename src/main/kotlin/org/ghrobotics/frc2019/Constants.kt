@@ -8,12 +8,16 @@
 
 package org.ghrobotics.frc2019
 
+import edu.wpi.first.wpilibj.geometry.Rotation2d
+import org.ghrobotics.lib.mathematics.twodim.geometry.Pose2d
 import org.ghrobotics.lib.mathematics.units.inches
 import org.ghrobotics.lib.mathematics.units.nativeunit.NativeUnitLengthModel
 import org.ghrobotics.lib.mathematics.units.nativeunit.nativeUnits
 
 @Suppress("MemberVisibilityCanBePrivate")
 object Constants {
+
+    val kFrontCameraRelativeToRobot = Pose2d(13.inches, 0.inches, Rotation2d())
 
     // Drivetrain
     object Drivetrain {

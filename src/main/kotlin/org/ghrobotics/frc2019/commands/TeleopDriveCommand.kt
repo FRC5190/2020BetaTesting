@@ -17,14 +17,14 @@ import org.ghrobotics.lib.wrappers.hid.getX
 import org.ghrobotics.lib.wrappers.hid.getY
 import org.ghrobotics.lib.wrappers.hid.kA
 
-class TeleopDriveCommand : FalconCommand(Drivetrain) {
+open class TeleopDriveCommand : FalconCommand(Drivetrain) {
     override fun execute() {
         Drivetrain.curvatureDrive(-xSource(), cSource(), qSource())
     }
 
     companion object {
-        private val xSource = Controls.driverController.getY(GenericHID.Hand.kLeft)
-        private val cSource = Controls.driverController.getX(GenericHID.Hand.kLeft)
-        private val qSource = Controls.driverController.getRawButton(kA)
+        val xSource = Controls.driverController.getY(GenericHID.Hand.kLeft)
+        val cSource = Controls.driverController.getX(GenericHID.Hand.kLeft)
+        val qSource = Controls.driverController.getRawButton(kA)
     }
 }

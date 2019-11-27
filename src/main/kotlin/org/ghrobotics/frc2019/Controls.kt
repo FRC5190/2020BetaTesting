@@ -8,10 +8,16 @@
 
 package org.ghrobotics.frc2019
 
+import org.ghrobotics.frc2019.commands.VisionDriveCommand
+import org.ghrobotics.lib.wrappers.hid.button
+import org.ghrobotics.lib.wrappers.hid.kY
 import org.ghrobotics.lib.wrappers.hid.xboxController
 
 object Controls {
-    val driverController = xboxController(0) { }
+    val driverController = xboxController(0) {
+        // Use vision-assisted driving when Y is pressed.
+        button(kY).change(VisionDriveCommand())
+    }
 
     /**
      * Update the controller state.

@@ -10,8 +10,8 @@ package org.ghrobotics.frc2019.subsystems
 
 import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkMaxLowLevel
-import edu.wpi.first.wpilibj.controller.RamseteController
 import edu.wpi.first.wpilibj.SPI
+import edu.wpi.first.wpilibj.controller.RamseteController
 import edu.wpi.first.wpilibj.geometry.Pose2d
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
