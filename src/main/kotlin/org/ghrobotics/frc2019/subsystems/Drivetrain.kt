@@ -12,7 +12,6 @@ import com.kauailabs.navx.frc.AHRS
 import com.revrobotics.CANSparkMaxLowLevel
 import edu.wpi.first.wpilibj.SPI
 import edu.wpi.first.wpilibj.controller.RamseteController
-import edu.wpi.first.wpilibj.geometry.Pose2d
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry
@@ -71,7 +70,7 @@ object Drivetrain : FalconWestCoastDrivetrain() {
     override val kinematics = DifferentialDriveKinematics(Constants.Drivetrain.kTrackWidth.value)
 
     // Odometry
-    override val odometry = DifferentialDriveOdometry(kinematics)
+    override val odometry = DifferentialDriveOdometry(kinematics, gyro())
 
     // Trajectory tracker
     override val controller = RamseteController(Constants.Drivetrain.kBeta, Constants.Drivetrain.kZeta)
@@ -94,11 +93,6 @@ object Drivetrain : FalconWestCoastDrivetrain() {
 
         defaultCommand = TeleopDriveCommand()
         recoverFromEmergency()
-    }
-
-    fun resetPosition(pose: Pose2d) {
-        navX.zeroYaw()
-        odometry.resetPosition(pose)
     }
 
     fun getPitch(): Rotation2d {
