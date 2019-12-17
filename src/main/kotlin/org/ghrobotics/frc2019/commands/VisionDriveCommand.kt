@@ -10,6 +10,7 @@ package org.ghrobotics.frc2019.commands
 
 import org.ghrobotics.frc2019.subsystems.Drivetrain
 import org.ghrobotics.frc2019.vision.TargetTracker2020
+import org.ghrobotics.frc2019.vision.VisionProcessing
 
 /**
  * Command that aligns with a vision target. The linear velocity is
@@ -17,6 +18,10 @@ import org.ghrobotics.frc2019.vision.TargetTracker2020
  * the target location relative to the robot.
  */
 class VisionDriveCommand : TeleopDriveCommand() {
+
+    override fun initialize() {
+        VisionProcessing.turnOnFrontCameraLED()
+    }
 
     override fun execute() {
         // Get the drivetrain position.
@@ -35,6 +40,10 @@ class VisionDriveCommand : TeleopDriveCommand() {
 
             Drivetrain.arcadeDrive(-xSource(), kP * transform.rotation.radians)
         }
+    }
+
+    override fun end(interrupted: Boolean) {
+        VisionProcessing.turnOffFrontCameraLED()
     }
 
     companion object {

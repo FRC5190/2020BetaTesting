@@ -8,29 +8,41 @@
 
 package org.ghrobotics.frc2019.auto
 
+import edu.wpi.first.wpilibj.geometry.Pose2d
 import edu.wpi.first.wpilibj.geometry.Rotation2d
+import edu.wpi.first.wpilibj.geometry.Translation2d
 import edu.wpi.first.wpilibj.trajectory.Trajectory
+import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator
 import edu.wpi.first.wpilibj.trajectory.constraint.CentripetalAccelerationConstraint
-import edu.wpi.first.wpilibj.util.Units
-import org.ghrobotics.lib.mathematics.twodim.geometry.Pose2d
+import org.ghrobotics.frc2019.subsystems.Drivetrain
 import org.ghrobotics.lib.mathematics.twodim.trajectory.FalconTrajectoryConfig
-import org.ghrobotics.lib.mathematics.twodim.trajectory.FalconTrajectoryGenerator
-import org.ghrobotics.lib.mathematics.twodim.trajectory.mirror
-import org.ghrobotics.lib.mathematics.units.derived.acceleration
-import org.ghrobotics.lib.mathematics.units.derived.velocity
 import org.ghrobotics.lib.mathematics.units.feet
+import org.ghrobotics.lib.mathematics.units.operations.div
+import org.ghrobotics.lib.mathematics.units.seconds
+
 
 /**
  * Container for autonomous paths.
  */
 object Paths {
-    val trajectoryConfig = FalconTrajectoryConfig(8.feet.velocity, 3.feet.acceleration)
-        .addConstraint(CentripetalAccelerationConstraint(Units.feetToMeters(6.0)))
-    val trajectory: Trajectory = FalconTrajectoryGenerator.generateTrajectory(
-        listOf(
-            Pose2d(5.326.feet, 9.697.feet, Rotation2d.fromDegrees(0.0)),
-            Pose2d(18.651.feet, 6.997.feet, Rotation2d.fromDegrees(0.0))
-        ),
-        trajectoryConfig
-    ).mirror()
+    // Trajectory constraints
+    private val kMaxVelocity = 7.feet / 1.seconds
+    private val kMaxAcceleration = 4.feet / 1.seconds / 1.seconds
+
+    // Trajectory config
+    private val config = FalconTrajectoryConfig(kMaxVelocity, kMaxAcceleration)
+        .setKinematics(Drivetrain.kinematics)
+        .addConstraint(CentripetalAccelerationConstraint(2.0 /* meters per second squared */))
+
+    // An example trajectory to follow. All units in meters.
+    var trajectory: Trajectory =
+        TrajectoryGenerator.generateTrajectory( // Start at the origin facing the +X direction
+            Pose2d(),  // Pass through these two interior waypoints, making an 's' curve path
+            listOf(
+                Translation2d(1.0, 1.0),
+                Translation2d(2.0, -1.0)
+            ),  // End 3 meters straight ahead of where we started, facing forward
+            Pose2d(3.0, 0.0, Rotation2d()),  // Pass config
+            config
+        )
 }

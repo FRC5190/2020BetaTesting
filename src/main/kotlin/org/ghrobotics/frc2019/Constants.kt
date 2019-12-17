@@ -17,7 +17,11 @@ import org.ghrobotics.lib.mathematics.units.nativeunit.nativeUnits
 @Suppress("MemberVisibilityCanBePrivate")
 object Constants {
 
-    val kFrontCameraRelativeToRobot = Pose2d(13.inches, 0.inches, Rotation2d())
+    // Vision
+    object Vision {
+        val kFrontCameraRelativeToRobot = Pose2d(13.inches, 0.inches, Rotation2d())
+        val kFrontCameraLEDPort = 0
+    }
 
     // Drivetrain
     object Drivetrain {

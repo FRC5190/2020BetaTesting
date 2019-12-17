@@ -21,7 +21,6 @@ object Robot : FalconTimedRobot() {
 
     // Chooser for the auto mode.
     private val autoModeSelector = enumSendableChooser<Autonomous.Mode>()
-    private val pitch = Shuffleboard.getTab("5190").add("Pitch", 0.0).entry
 
     // Constructor of the Robot class.
     init {
@@ -36,6 +35,9 @@ object Robot : FalconTimedRobot() {
         // Add auto mode selector to Shuffleboard
         val tab = Shuffleboard.getTab("5190")
         tab.add("Auto Selector", autoModeSelector)
+
+        // Turn off Vision LED
+        VisionProcessing.turnOffFrontCameraLED()
     }
 
     // Runs once when autonomous period starts
