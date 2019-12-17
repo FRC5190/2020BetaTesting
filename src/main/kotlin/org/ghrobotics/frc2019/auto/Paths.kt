@@ -20,7 +20,6 @@ import org.ghrobotics.lib.mathematics.units.feet
 import org.ghrobotics.lib.mathematics.units.operations.div
 import org.ghrobotics.lib.mathematics.units.seconds
 
-
 /**
  * Container for autonomous paths.
  */
@@ -36,13 +35,13 @@ object Paths {
 
     // An example trajectory to follow. All units in meters.
     var trajectory: Trajectory =
-        TrajectoryGenerator.generateTrajectory( // Start at the origin facing the +X direction
-            Pose2d(),  // Pass through these two interior waypoints, making an 's' curve path
+        TrajectoryGenerator.generateTrajectory(
+            Pose2d(), // Pass through these two interior waypoints, making an 's' curve path
             listOf(
                 Translation2d(1.0, 1.0),
                 Translation2d(2.0, -1.0)
-            ),  // End 3 meters straight ahead of where we started, facing forward
-            Pose2d(3.0, 0.0, Rotation2d()),  // Pass config
+            ), // End 3 meters straight ahead of where we started, facing forward
+            Pose2d(3.0, 0.0, Rotation2d()), // Pass config
             config
         )
 }

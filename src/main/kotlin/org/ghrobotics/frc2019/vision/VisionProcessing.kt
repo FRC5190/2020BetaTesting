@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj.geometry.Pose2d
 import edu.wpi.first.wpilibj.geometry.Rotation2d
 import edu.wpi.first.wpilibj.geometry.Transform2d
+import kotlin.math.tan
 import org.ghrobotics.frc2019.Constants.Vision.kFrontCameraLEDPort
 import org.ghrobotics.frc2019.Constants.Vision.kFrontCameraRelativeToRobot
 import org.ghrobotics.frc2019.subsystems.Drivetrain
@@ -20,7 +21,6 @@ import org.ghrobotics.lib.commands.FalconSubsystem
 import org.ghrobotics.lib.mathematics.twodim.geometry.Transform2d
 import org.ghrobotics.lib.mathematics.units.inches
 import org.ghrobotics.lib.mathematics.units.seconds
-import kotlin.math.tan
 
 /**
  * Object that manages Vision processing.
